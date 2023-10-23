@@ -2,12 +2,11 @@ import { useState } from "react";
 import { BreedList } from "../components/BreedList";
 import { SearchForm } from "../components/SearchForm";
 import { getRandomDogByBreed } from "../api/getDogs";
+import { BreedT } from "../types/BreedT";
+import { SelectedBreed } from "../components/SelectedBreed";
 
 export function Dashboard() {
-  const [selectedBreed, setSelectedBreed] = useState<{
-    name: string;
-    image: string;
-  } | null>(null);
+  const [selectedBreed, setSelectedBreed] = useState<BreedT | null>(null);
 
   const handleSelectBreed = async (breedName: string) => {
     const breedImage = await getRandomDogByBreed(breedName);
@@ -23,8 +22,7 @@ export function Dashboard() {
       <SearchForm />
       <div style={{ display: "flex" }}>
         <BreedList onSelectBreed={handleSelectBreed} />
-        <h2>{selectedBreed?.name}</h2>
-        <img src={selectedBreed?.image} />
+        {selectedBreed && <SelectedBreed selectedBreed={selectedBreed} />}
       </div>
     </main>
   );
