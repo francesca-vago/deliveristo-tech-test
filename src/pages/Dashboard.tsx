@@ -17,12 +17,30 @@ export function Dashboard() {
     });
   };
 
+  const handleRefreshBreedImage = async () => {
+    if (selectedBreed) {
+      const breedImage = await getRandomDogByBreed(selectedBreed.name);
+
+      setSelectedBreed({
+        name: selectedBreed.name,
+        image: breedImage,
+      });
+    }
+  };
+
+  const handleRestoreBreedImage = async () => setSelectedBreed(null);
+
   return (
     <main>
       <SearchForm />
       <div style={{ display: "flex" }}>
         <BreedList onSelectBreed={handleSelectBreed} />
-        {selectedBreed && <SelectedBreed selectedBreed={selectedBreed} />}
+        {selectedBreed && (
+          <SelectedBreed
+            selectedBreed={selectedBreed}
+            onRefresh={handleRefreshBreedImage}
+          />
+        )}
       </div>
     </main>
   );
