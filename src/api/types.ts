@@ -1,8 +1,7 @@
-import { z } from "zod";
+import { ZodSchema, z } from "zod";
 
-export const ResponseZ = z.object({
-  status: z.string(),
-  message: z.string(),
-});
-
-export type ResponseT = z.infer<typeof ResponseZ>;
+export const ResponseZ = <T extends ZodSchema<unknown>>(messageSchema: T) =>
+  z.object({
+    status: z.string(),
+    message: messageSchema,
+  });

@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-import { getBreedList } from "../api/getBreeds";
-
-type Breeds = {
-  breed: string;
-  subBreeds: string[];
-}[];
+import { Breeds, getBreedList } from "../api/getBreeds";
 
 interface BreedListProps {
   onSelectBreed: (breed: string) => void;

@@ -2,14 +2,18 @@ import { z } from "zod";
 import { fetchDecode } from "./utils";
 import { ResponseZ } from "./types";
 
-export const BreedZ = z.record(z.array(z.string()));
+const BreedZ = z.record(z.array(z.string()));
+const BreedResponseZ = ResponseZ(BreedZ);
 
-export type BreedT = z.infer<typeof ResponseZ>;
+export type Breeds = {
+  breed: string;
+  subBreeds: string[];
+}[];
 
-export const getBreedList = async (signal?: AbortSignal) => {
+export const getBreedList = async (signal?: AbortSignal): Promise<Breeds> => {
   const response = await fetchDecode(
     `https://dog.ceo/api/breeds/list/all`,
-    ResponseZ,
+    BreedResponseZ,
     signal
   );
 
