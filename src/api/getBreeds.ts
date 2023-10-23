@@ -1,14 +1,9 @@
 import { z } from "zod";
 import { fetchDecode } from "./utils";
+import { ResponseZ } from "./types";
 
 export const BreedZ = z.record(z.array(z.string()));
 
-export const ResponseZ = z.object({
-  status: z.string(),
-  message: BreedZ,
-});
-
-export type ResponseT = z.infer<typeof ResponseZ>;
 export type BreedT = z.infer<typeof ResponseZ>;
 
 export const getBreedList = async (signal?: AbortSignal) => {

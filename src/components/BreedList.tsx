@@ -6,7 +6,11 @@ type Breeds = {
   subBreeds: string[];
 }[];
 
-export function BreedList() {
+interface BreedListProps {
+  onSelectBreed: (breed: string) => void;
+}
+
+export function BreedList({ onSelectBreed }: BreedListProps) {
   const [breeds, setBreeds] = useState<Breeds>([]);
 
   useEffect(() => {
@@ -23,7 +27,7 @@ export function BreedList() {
   return (
     <ul>
       {breeds.map(({ breed, subBreeds }) => (
-        <li>
+        <li onClick={() => onSelectBreed(breed)}>
           {breed} - {subBreeds.map((subBreed) => subBreed)}
         </li>
       ))}
