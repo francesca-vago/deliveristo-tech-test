@@ -2,9 +2,10 @@ import { ZodSchema, z } from "zod";
 
 export const fetchDecode = async <T extends ZodSchema<unknown>>(
   url: string,
-  decoder: T
+  decoder: T,
+  signal?: AbortSignal
 ): Promise<z.infer<T>> => {
-  const response = await fetch(url);
+  const response = await fetch(url, { signal });
   if (!response.ok) {
     throw Error();
   }
