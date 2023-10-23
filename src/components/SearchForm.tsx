@@ -1,5 +1,6 @@
 import { useId, useState } from "react";
 import searchIcon from "../assets/search.svg";
+import { getRandomDogByBreed } from "../api/getDogs";
 
 export function SearchForm() {
   const searchId = useId();
@@ -10,7 +11,7 @@ export function SearchForm() {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    fetch("https://dog.ceo/api/breed/shiba/images/random");
+    getRandomDogByBreed("shiba");
   };
 
   return (
