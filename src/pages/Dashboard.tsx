@@ -4,6 +4,7 @@ import { SearchForm } from "../components/SearchForm";
 import { getRandomDogByBreed } from "../api/getDogs";
 import { BreedT } from "../types/BreedT";
 import { SelectedBreed } from "../components/SelectedBreed";
+import { RestoreButton } from "../components/RestoreButton";
 
 export function Dashboard() {
   const [selectedBreed, setSelectedBreed] = useState<BreedT | null>(null);
@@ -32,6 +33,7 @@ export function Dashboard() {
 
   return (
     <main>
+      <RestoreButton onRestore={handleRestoreBreedImage} />
       <SearchForm />
       <div style={{ display: "flex" }}>
         <BreedList onSelectBreed={handleSelectBreed} />

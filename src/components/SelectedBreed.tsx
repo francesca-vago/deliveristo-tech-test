@@ -14,10 +14,7 @@ export function SelectedBreed({
   return (
     <div>
       <h2>{selectedBreed.name}</h2>
-      <RefreshButton
-        selectedBreedName={selectedBreed.name}
-        onRefresh={onRefresh}
-      />
+      <RefreshButton onRefresh={onRefresh} />
       <DogImage imgSrc={selectedBreed.image} />
     </div>
   );

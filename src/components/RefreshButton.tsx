@@ -1,11 +1,7 @@
 interface RefreshButtonProps {
-  selectedBreedName: string;
   onRefresh: VoidFunction;
 }
 
-export function RefreshButton({
-  selectedBreedName,
-  onRefresh,
-}: RefreshButtonProps) {
+export function RefreshButton({ onRefresh }: RefreshButtonProps) {
   return <button onClick={() => onRefresh()}>Refresh</button>;
 }
