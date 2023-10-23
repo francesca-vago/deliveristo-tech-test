@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Breeds, getBreedList } from "../api/getBreeds";
+import { SearchForm } from "./SearchForm";
 
 interface BreedListProps {
   onSelectBreed: (breed: string) => void;
@@ -20,12 +21,15 @@ export function BreedList({ onSelectBreed }: BreedListProps) {
   }, []);
 
   return (
-    <ul>
-      {breeds.map(({ breed, subBreeds }) => (
-        <li onClick={() => onSelectBreed(breed)}>
-          {breed} - {subBreeds.map((subBreed) => subBreed)}
-        </li>
-      ))}
-    </ul>
+    <div>
+      <SearchForm />
+      <ul style={{ listStyle: "none", textAlign: "left" }}>
+        {breeds.map(({ breed, subBreeds }) => (
+          <li onClick={() => onSelectBreed(breed)}>
+            {breed} - {subBreeds.map((subBreed) => subBreed)}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

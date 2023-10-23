@@ -34,7 +34,6 @@ export function Dashboard() {
   return (
     <main>
       <RestoreButton onRestore={handleRestoreBreedImage} />
-      <SearchForm />
       <div style={{ display: "flex" }}>
         <BreedList onSelectBreed={handleSelectBreed} />
         {selectedBreed && (

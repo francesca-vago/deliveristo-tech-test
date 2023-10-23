@@ -3,5 +3,5 @@ interface RestoreButtonProps {
 }
 
 export function RestoreButton({ onRestore }: RestoreButtonProps) {
-  return <button onClick={() => onRestore()}>Refresh</button>;
+  return <button onClick={() => onRestore()}>Restore</button>;
 }
