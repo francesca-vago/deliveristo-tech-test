@@ -6,6 +6,34 @@ interface BreedListProps {
   onSelectBreed: (breed: string) => void;
 }
 
+interface BreedItemProps {
+  breed: string;
+  subBreeds: string[];
+  onClick: (breed: string) => void;
+}
+
+function BreedItem({ breed, subBreeds, onClick }: BreedItemProps) {
+  const [showSubBreeds, setShowSubBreeds] = useState(false);
+
+  return (
+    <>
+      <li>
+        <p onClick={() => onClick(breed)}>{breed}</p>
+        {subBreeds.length ? (
+          <button onClick={() => setShowSubBreeds(true)}>Open</button>
+        ) : null}
+      </li>
+      {showSubBreeds && (
+        <ul>
+          {subBreeds.map((sub) => (
+            <li onClick={() => onClick(sub)}>{sub}</li>
+          ))}
+        </ul>
+      )}
+    </>
+  );
+}
+
 export function BreedList({ onSelectBreed }: BreedListProps) {
   const [breeds, setBreeds] = useState<Breeds>([]);
 
@@ -25,9 +53,11 @@ export function BreedList({ onSelectBreed }: BreedListProps) {
       <SearchForm />
       <ul style={{ listStyle: "none", textAlign: "left" }}>
         {breeds.map(({ breed, subBreeds }) => (
-          <li onClick={() => onSelectBreed(breed)}>
-            {breed} - {subBreeds.map((subBreed) => subBreed)}
-          </li>
+          <BreedItem
+            breed={breed}
+            subBreeds={subBreeds}
+            onClick={onSelectBreed}
+          />
         ))}
       </ul>
     </div>
