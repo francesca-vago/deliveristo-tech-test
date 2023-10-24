@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { BreedList } from "../components/BreedList";
-import { SearchForm } from "../components/SearchForm";
 import { getRandomDogByBreed } from "../api/getDogs";
 import { BreedT } from "../types/BreedT";
 import { SelectedBreed } from "../components/SelectedBreed";

@@ -1,6 +1,12 @@
 import { useId, useState } from "react";
 import searchIcon from "../assets/search.svg";
 import { getRandomDogByBreed } from "../api/getDogs";
+import {
+  formContainer,
+  searchButton,
+  searchForm,
+  searchInput,
+} from "./SearchForm.css";
 
 export function SearchForm() {
   const searchId = useId();
@@ -15,8 +21,8 @@ export function SearchForm() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className={formContainer}>
+      <form onSubmit={handleSubmit} className={searchForm}>
         <label htmlFor={searchId} hidden>
           Search
         </label>
@@ -26,8 +32,9 @@ export function SearchForm() {
           onChange={handleChangeInput}
           id={searchId}
           placeholder="Search"
+          className={searchInput}
         />
-        <button type="submit" aria-label="search">
+        <button type="submit" aria-label="search" className={searchButton}>
           <img src={searchIcon} alt="search icon" />
         </button>
       </form>
