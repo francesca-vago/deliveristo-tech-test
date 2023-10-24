@@ -5,9 +5,21 @@ import { fetchDecode } from "./utils";
 const DogZ = z.string();
 const DogResponseZ = ResponseZ(DogZ);
 
-export const getRandomDogByBreed = async (query: string) => {
+export const getRandomDogByBreed = async (breed: string) => {
   const response = await fetchDecode(
-    `https://dog.ceo/api/breed/${query}/images/random`,
+    `https://dog.ceo/api/breed/${breed}/images/random`,
+    DogResponseZ
+  );
+
+  return response.message;
+};
+
+export const getRandomDogBySubBreed = async (
+  breed: string,
+  subBreed: string
+) => {
+  const response = await fetchDecode(
+    `https://dog.ceo/api/breed/${breed}/${subBreed}/images/random`,
     DogResponseZ
   );
 
@@ -17,9 +29,9 @@ export const getRandomDogByBreed = async (query: string) => {
 const DogListZ = z.array(z.string());
 const DogListResponseZ = ResponseZ(DogListZ);
 
-export const getDogListByBreed = async (query: string) => {
+export const getDogListByBreed = async (breed: string) => {
   const response = await fetchDecode(
-    `https://dog.ceo/api/breed/${query}/images`,
+    `https://dog.ceo/api/breed/${breed}/images`,
     DogListResponseZ
   );
 

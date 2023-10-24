@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BreedList } from "../components/BreedList";
-import { getRandomDogByBreed } from "../api/getDogs";
+import { getRandomDogByBreed, getRandomDogBySubBreed } from "../api/getDogs";
 import { BreedT } from "../types/BreedT";
 import { SelectedBreed } from "../components/SelectedBreed";
 import { RestoreButton } from "../components/RestoreButton";
@@ -8,12 +8,20 @@ import { RestoreButton } from "../components/RestoreButton";
 export function Dashboard() {
   const [selectedBreed, setSelectedBreed] = useState<BreedT | null>(null);
 
-  const handleSelectBreed = async (breedName: string) => {
-    const breedImage = await getRandomDogByBreed(breedName);
+  const handleSelectBreed = async (breed: string, subBreed?: string) => {
+    const getDogImage = () => {
+      if (subBreed) {
+        return getRandomDogBySubBreed(breed, subBreed);
+      } else {
+        return getRandomDogByBreed(breed);
+      }
+    };
+    const dogImage = await getDogImage();
 
     setSelectedBreed({
-      name: breedName,
-      image: breedImage,
+      name: breed,
+      subBreed: subBreed ?? null,
+      image: dogImage,
     });
   };
 
@@ -23,6 +31,7 @@ export function Dashboard() {
 
       setSelectedBreed({
         name: selectedBreed.name,
+        subBreed: selectedBreed.subBreed,
         image: breedImage,
       });
     }

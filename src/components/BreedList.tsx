@@ -3,13 +3,13 @@ import { Breeds, getBreedList } from "../api/getBreeds";
 import { SearchForm } from "./SearchForm";
 
 interface BreedListProps {
-  onSelectBreed: (breed: string) => void;
+  onSelectBreed: (breed: string, subBreed?: string) => void;
 }
 
 interface BreedItemProps {
   breed: string;
   subBreeds: string[];
-  onClick: (breed: string) => void;
+  onClick: (breed: string, subBreed?: string) => void;
 }
 
 function BreedItem({ breed, subBreeds, onClick }: BreedItemProps) {
@@ -26,7 +26,9 @@ function BreedItem({ breed, subBreeds, onClick }: BreedItemProps) {
       {showSubBreeds && (
         <ul>
           {subBreeds.map((sub) => (
-            <li onClick={() => onClick(sub)}>{sub}</li>
+            <li key={sub} onClick={() => onClick(breed, sub)}>
+              {sub}
+            </li>
           ))}
         </ul>
       )}
@@ -54,6 +56,7 @@ export function BreedList({ onSelectBreed }: BreedListProps) {
       <ul style={{ listStyle: "none", textAlign: "left" }}>
         {breeds.map(({ breed, subBreeds }) => (
           <BreedItem
+            key={breed}
             breed={breed}
             subBreeds={subBreeds}
             onClick={onSelectBreed}
