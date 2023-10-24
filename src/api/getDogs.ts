@@ -37,3 +37,12 @@ export const getDogListByBreed = async (breed: string) => {
 
   return response.message;
 };
+
+export const getDogListBySubBreed = async (breed: string, subBreed: string) => {
+  const response = await fetchDecode(
+    `https://dog.ceo/api/breed/${breed}/${subBreed}/images`,
+    DogListResponseZ
+  );
+
+  return response.message;
+};

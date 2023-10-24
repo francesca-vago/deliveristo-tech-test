@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { BreedList } from "../components/BreedList";
-import { getRandomDogByBreed, getRandomDogBySubBreed } from "../api/getDogs";
+import {
+  getDogListByBreed,
+  getDogListBySubBreed,
+  getRandomDogByBreed,
+  getRandomDogBySubBreed,
+} from "../api/getDogs";
 import { BreedT } from "../types/BreedT";
 import { SelectedBreed } from "../components/SelectedBreed";
 import { RestoreButton } from "../components/RestoreButton";
@@ -8,32 +13,64 @@ import { RestoreButton } from "../components/RestoreButton";
 export function Dashboard() {
   const [selectedBreed, setSelectedBreed] = useState<BreedT | null>(null);
 
-  const handleSelectBreed = async (breed: string, subBreed?: string) => {
-    const getDogImage = () => {
-      if (subBreed) {
-        return getRandomDogBySubBreed(breed, subBreed);
-      } else {
-        return getRandomDogByBreed(breed);
-      }
-    };
-    const dogImage = await getDogImage();
+  const getDogImage = (breed: string, subBreed: string | null) => {
+    if (subBreed) {
+      return getRandomDogBySubBreed(breed, subBreed);
+    } else {
+      return getRandomDogByBreed(breed);
+    }
+  };
 
+  const getImageList = (breed: string, subBreed: string | null) => {
+    if (subBreed) {
+      return getDogListBySubBreed(breed, subBreed);
+    } else {
+      return getDogListByBreed(breed);
+    }
+  };
+
+  const handleSelectBreed = (
+    breed: string,
+    dogImages: string[],
+    subBreed?: string
+  ) => {
     setSelectedBreed({
       name: breed,
       subBreed: subBreed ?? null,
-      image: dogImage,
+      images: dogImages,
     });
   };
 
-  const handleRefreshBreedImage = async () => {
-    if (selectedBreed) {
-      const breedImage = await getRandomDogByBreed(selectedBreed.name);
+  const handleGetDogImage = async (breed: string, subBreed?: string) => {
+    const dogImage = await getDogImage(breed, null);
+    handleSelectBreed(breed, [dogImage], subBreed ?? undefined);
+  };
 
-      setSelectedBreed({
-        name: selectedBreed.name,
-        subBreed: selectedBreed.subBreed,
-        image: breedImage,
-      });
+  const handleRefreshBreedImage = async () => {
+    // if (selectedBreed) {
+    //   const breedImage = await getDogImage(
+    //     selectedBreed.name,
+    //     selectedBreed.subBreed
+    //   );
+    //   handleSelectBreed(
+    //     selectedBreed.name,
+    //     breedImage,
+    //     selectedBreed?.subBreed
+    //   );
+    // }
+  };
+
+  const handleGetImageList = async () => {
+    if (selectedBreed) {
+      const dogImages = await getImageList(
+        selectedBreed.name,
+        selectedBreed?.subBreed ?? null
+      );
+      handleSelectBreed(
+        selectedBreed.name,
+        dogImages,
+        selectedBreed?.subBreed ?? undefined
+      );
     }
   };
 
@@ -43,10 +80,11 @@ export function Dashboard() {
     <main>
       <RestoreButton onRestore={handleRestoreBreedImage} />
       <div style={{ display: "flex" }}>
-        <BreedList onSelectBreed={handleSelectBreed} />
+        <BreedList onSelectBreed={handleGetDogImage} />
         {selectedBreed && (
           <SelectedBreed
             selectedBreed={selectedBreed}
+            onGetImageList={handleGetImageList}
             onRefresh={handleRefreshBreedImage}
           />
         )}
