@@ -1,6 +1,5 @@
 import { useId, useState } from "react";
 import searchIcon from "../assets/search.svg";
-import { getRandomDogByBreed } from "../api/getDogs";
 import {
   formContainer,
   searchButton,
@@ -8,16 +7,24 @@ import {
   searchInput,
 } from "./SearchForm.css";
 
-export function SearchForm() {
+interface SearchFormProps {
+  onSearchChange?: (searchQuery: string) => void;
+  onFormSubmit?: (searchQuery: string) => void;
+}
+
+export function SearchForm({ onSearchChange, onFormSubmit }: SearchFormProps) {
   const searchId = useId();
   const [searchQuery, setSearchQuery] = useState("");
 
-  const handleChangeInput: React.ChangeEventHandler<HTMLInputElement> = (e) =>
+  const handleChangeInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setSearchQuery(e.target.value);
+    onSearchChange?.(e.target.value);
+  };
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    getRandomDogByBreed("shiba");
+
+    onFormSubmit?.(searchQuery);
   };
 
   return (
