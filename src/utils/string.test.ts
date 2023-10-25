@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { upperCaseWords } from "./string";
+import { formatBreed, upperCaseWords } from "./string";
 
 describe("utils/string", () => {
   describe("upperCaseWords", () => {
@@ -19,6 +19,19 @@ describe("utils/string", () => {
       const result = upperCaseWords("australian shepherd");
 
       expect(result).toBe("Australian Shepherd");
+    });
+  });
+  describe("formatBreed", () => {
+    test("should format a breed name with first letter upper cased", () => {
+      const result = formatBreed({ breed: "bulldog", subBreed: "french" });
+
+      expect(result).toBe("French Bulldog");
+    });
+
+    test("should format a breed name without sub breed without trailing spaces", () => {
+      const result = formatBreed({ breed: "shiba", subBreed: null });
+
+      expect(result).toBe("Shiba");
     });
   });
 });

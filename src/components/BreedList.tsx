@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Breeds } from "../api/getBreeds";
-import { SearchForm } from "./SearchForm";
+import { upperCaseWords } from "../utils/string";
 import {
   breedButton,
   breedList,
@@ -8,11 +8,11 @@ import {
   toggleSubBreedsButton,
 } from "./BreedList.css";
 import { useFilteredBreeds } from "../hooks/useFilteredBreeds";
-import { upperCaseWords } from "../utils/string";
 
 interface BreedListProps {
   onSelectBreed: (breed: string, subBreed?: string) => void;
   breeds: Breeds;
+  searchQuery?: string;
 }
 
 interface BreedItemProps {
@@ -59,24 +59,23 @@ function BreedItem({ breed, subBreeds, onClick }: BreedItemProps) {
   );
 }
 
-export function BreedList({ onSelectBreed, breeds }: BreedListProps) {
-  const [searchQuery, setSearchQuery] = useState("");
-
+export function BreedList({
+  onSelectBreed,
+  breeds,
+  searchQuery,
+}: BreedListProps) {
   const filteredBreeds = useFilteredBreeds(breeds, searchQuery);
 
   return (
-    <div>
-      <SearchForm onSearchChange={setSearchQuery} />
-      <ul className={breedList}>
-        {filteredBreeds.map(({ breed, subBreeds }) => (
-          <BreedItem
-            key={breed}
-            breed={breed}
-            subBreeds={subBreeds}
-            onClick={onSelectBreed}
-          />
-        ))}
-      </ul>
-    </div>
+    <ul className={breedList}>
+      {filteredBreeds.map(({ breed, subBreeds }) => (
+        <BreedItem
+          key={breed}
+          breed={breed}
+          subBreeds={subBreeds}
+          onClick={onSelectBreed}
+        />
+      ))}
+    </ul>
   );
 }

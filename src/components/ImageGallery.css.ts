@@ -9,3 +9,10 @@ export const gridContainer = style({
   listStyle: "none",
   padding: `0 ${theme.spacing.medium}`,
 });
+
+export const dogImage = style({
+  borderRadius: theme.spacing.small,
+  width: "100%",
+  aspectRatio: "3 / 4",
+  objectFit: "cover",
+});

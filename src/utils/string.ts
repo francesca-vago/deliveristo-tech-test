@@ -1,3 +1,5 @@
+import { BreedT } from "../types/BreedT";
+
 export const upperCaseWords = (text: string) =>
   text
     .split(" ")
@@ -8,3 +10,9 @@ export const upperCaseWords = (text: string) =>
       return `${firstLetter.toUpperCase()}${rest}`;
     })
     .join(" ");
+
+export const formatBreed = (breed: BreedT) => {
+  const breedName = [breed.subBreed, breed.breed].filter(Boolean).join(" ");
+
+  return upperCaseWords(breedName);
+};

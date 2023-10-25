@@ -5,10 +5,14 @@ import { fetchDecode } from "./utils";
 const DogZ = z.string();
 const DogResponseZ = ResponseZ(DogZ);
 
-export const getRandomDogByBreed = async (breed: string) => {
+export const getRandomDogByBreed = async (
+  breed: string,
+  signal?: AbortSignal
+) => {
   const response = await fetchDecode(
     `https://dog.ceo/api/breed/${breed}/images/random`,
-    DogResponseZ
+    DogResponseZ,
+    signal
   );
 
   return response.message;
@@ -16,11 +20,13 @@ export const getRandomDogByBreed = async (breed: string) => {
 
 export const getRandomDogBySubBreed = async (
   breed: string,
-  subBreed: string
+  subBreed: string,
+  signal?: AbortSignal
 ) => {
   const response = await fetchDecode(
     `https://dog.ceo/api/breed/${breed}/${subBreed}/images/random`,
-    DogResponseZ
+    DogResponseZ,
+    signal
   );
 
   return response.message;
@@ -29,19 +35,28 @@ export const getRandomDogBySubBreed = async (
 const DogListZ = z.array(z.string());
 const DogListResponseZ = ResponseZ(DogListZ);
 
-export const getDogListByBreed = async (breed: string) => {
+export const getDogListByBreed = async (
+  breed: string,
+  signal?: AbortSignal
+) => {
   const response = await fetchDecode(
     `https://dog.ceo/api/breed/${breed}/images`,
-    DogListResponseZ
+    DogListResponseZ,
+    signal
   );
 
   return response.message;
 };
 
-export const getDogListBySubBreed = async (breed: string, subBreed: string) => {
+export const getDogListBySubBreed = async (
+  breed: string,
+  subBreed: string,
+  signal?: AbortSignal
+) => {
   const response = await fetchDecode(
     `https://dog.ceo/api/breed/${breed}/${subBreed}/images`,
-    DogListResponseZ
+    DogListResponseZ,
+    signal
   );
 
   return response.message;
