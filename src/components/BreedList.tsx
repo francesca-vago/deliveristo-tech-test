@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import { Breeds, getBreedList } from "../api/getBreeds";
+import { useState } from "react";
+import { Breeds } from "../api/getBreeds";
 import { SearchForm } from "./SearchForm";
 
 interface BreedListProps {
   onSelectBreed: (breed: string, subBreed?: string) => void;
+  breeds: Breeds;
 }
 
 interface BreedItemProps {
@@ -15,19 +16,30 @@ interface BreedItemProps {
 function BreedItem({ breed, subBreeds, onClick }: BreedItemProps) {
   const [showSubBreeds, setShowSubBreeds] = useState(false);
 
+  const renderBreedButton = (breed: string, onClick: () => void) => (
+    <button type="button" onClick={onClick}>
+      {breed}
+    </button>
+  );
+
   return (
     <>
       <li>
-        <p onClick={() => onClick(breed)}>{breed}</p>
-        {subBreeds.length ? (
-          <button onClick={() => setShowSubBreeds(true)}>Open</button>
-        ) : null}
+        {renderBreedButton(breed, () => onClick(breed))}
+        {Boolean(subBreeds.length) && (
+          <button
+            type="button"
+            onClick={() => setShowSubBreeds(!showSubBreeds)}
+          >
+            {showSubBreeds ? "Close" : "Open"}
+          </button>
+        )}
       </li>
       {showSubBreeds && (
         <ul>
           {subBreeds.map((sub) => (
-            <li key={sub} onClick={() => onClick(breed, sub)}>
-              {sub}
+            <li key={sub}>
+              {renderBreedButton(sub, () => onClick(breed, sub))}
             </li>
           ))}
         </ul>
@@ -36,20 +48,7 @@ function BreedItem({ breed, subBreeds, onClick }: BreedItemProps) {
   );
 }
 
-export function BreedList({ onSelectBreed }: BreedListProps) {
-  const [breeds, setBreeds] = useState<Breeds>([]);
-
-  useEffect(() => {
-    const abortController = new AbortController();
-    getBreedList(abortController.signal)
-      .then((breeds) => setBreeds(breeds))
-      .catch((error) => console.log(error));
-
-    return () => {
-      abortController.abort();
-    };
-  }, []);
-
+export function BreedList({ onSelectBreed, breeds }: BreedListProps) {
   return (
     <div>
       <SearchForm />

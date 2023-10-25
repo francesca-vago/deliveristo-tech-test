@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BreedList } from "../components/BreedList";
 import {
   getDogListByBreed,
@@ -9,6 +9,7 @@ import {
 import { BreedT } from "../types/BreedT";
 import { SelectedBreed } from "../components/SelectedBreed";
 import { RestoreButton } from "../components/RestoreButton";
+import { Breeds, getBreedList } from "../api/getBreeds";
 
 export function Dashboard() {
   const [selectedBreed, setSelectedBreed] = useState<BreedT | null>(null);
@@ -76,11 +77,24 @@ export function Dashboard() {
 
   const handleRestoreBreedImage = async () => setSelectedBreed(null);
 
+  const [breeds, setBreeds] = useState<Breeds>([]);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    getBreedList(abortController.signal)
+      .then((breeds) => setBreeds(breeds))
+      .catch((error) => console.log(error));
+
+    return () => {
+      abortController.abort();
+    };
+  }, []);
+
   return (
     <main>
       <RestoreButton onRestore={handleRestoreBreedImage} />
       <div style={{ display: "flex" }}>
-        <BreedList onSelectBreed={handleGetDogImage} />
+        <BreedList onSelectBreed={handleGetDogImage} breeds={breeds} />
         {selectedBreed && (
           <SelectedBreed
             selectedBreed={selectedBreed}
