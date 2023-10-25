@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BreedSearch } from "../components/BreedSearch";
 import { SelectedBreed } from "../components/SelectedBreed";
 import { BreedT } from "../types/BreedT";
+import { main } from "./Dashboard.css";
 
 export function Dashboard() {
   const [selectedBreed, setSelectedBreed] = useState<BreedT | null>(null);
@@ -14,11 +15,9 @@ export function Dashboard() {
   };
 
   return (
-    <main>
-      <div style={{ display: "flex" }}>
-        <BreedSearch onSelectBreed={handleSelectBreed} />
-        {selectedBreed && <SelectedBreed breed={selectedBreed} />}
-      </div>
+    <main className={main}>
+      <BreedSearch onSelectBreed={handleSelectBreed} />
+      {selectedBreed && <SelectedBreed breed={selectedBreed} />}
     </main>
   );
 }

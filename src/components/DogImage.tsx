@@ -6,7 +6,7 @@ import {
 import { BreedT } from "../types/BreedT";
 import { foldQueryResult } from "../utils/query";
 import { formatBreed } from "../utils/string";
-import { dogImage } from "./DogImage.css";
+import { dogImage, dogImageContainer } from "./DogImage.css";
 import { RefreshButton } from "./RefreshButton";
 import { useEffect } from "react";
 
@@ -36,11 +36,13 @@ export function DogImage({ breed }: DogImageProps) {
           <>Loading</>
         ),
         (imageSrc) => (
-          <img
-            src={imageSrc}
-            alt={`${formatBreed(breed)} image`}
-            className={dogImage}
-          />
+          <div className={dogImageContainer}>
+            <img
+              src={imageSrc}
+              alt={`${formatBreed(breed)} image`}
+              className={dogImage}
+            />
+          </div>
         ),
         () => (
           <>Error</>

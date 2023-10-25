@@ -3,8 +3,7 @@ import { theme } from "../theme.css";
 
 export const formContainer = style({
   backgroundColor: theme.colors.lightGray,
-  padding: `${theme.spacing.medium} 0`,
-  // boxShadow: `0 ${theme.spacing.xsmall} ${theme.spacing.xsmall} rgba(0, 0, 0, 0.1)`,
+  padding: `${theme.spacing.xlarge} 0 ${theme.spacing.medium}`,
   position: "sticky",
   top: 0,
 });

@@ -3,6 +3,7 @@ import { useBreeds } from "../queries/breeds";
 import { foldQueryResult } from "../utils/query";
 import { BreedList } from "./BreedList";
 import { SearchForm } from "./SearchForm";
+import { breedSearchContainer } from "./BreedSearch.css";
 
 interface BreedListProps {
   onSelectBreed: (breed: string, subBreed?: string) => void;
@@ -14,7 +15,7 @@ export function BreedSearch({ onSelectBreed }: BreedListProps) {
   const breeds = useBreeds();
 
   return (
-    <div>
+    <div className={breedSearchContainer}>
       <SearchForm onSearchChange={setSearchQuery} />
       {foldQueryResult(
         breeds,
