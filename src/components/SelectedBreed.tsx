@@ -4,6 +4,7 @@ import { DogImage } from "./DogImage";
 import { RefreshButton } from "./RefreshButton";
 import { ImageGallery } from "./ImageGallery";
 import { imageContainer } from "./SelectedBreed.css";
+import { upperCaseWords } from "../utils/string";
 
 interface SelectedBreedProps {
   selectedBreed: BreedT;
@@ -25,7 +26,7 @@ export function SelectedBreed({
 
   return (
     <div className={imageContainer}>
-      <h2>{selectedBreed.name}</h2>
+      <h2>{upperCaseWords(selectedBreed.name)}</h2>
       <RefreshButton onRefresh={onRefresh} />
       <button onClick={handleClick}>Get List</button>
       {showList ? (

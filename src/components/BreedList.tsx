@@ -8,6 +8,7 @@ import {
   toggleSubBreedsButton,
 } from "./BreedList.css";
 import { useFilteredBreeds } from "../hooks/useFilteredBreeds";
+import { upperCaseWords } from "../utils/string";
 
 interface BreedListProps {
   onSelectBreed: (breed: string, subBreed?: string) => void;
@@ -25,7 +26,7 @@ function BreedItem({ breed, subBreeds, onClick }: BreedItemProps) {
 
   const renderBreedButton = (breed: string, onClick: () => void) => (
     <button type="button" onClick={onClick} className={breedButton}>
-      {breed}
+      {upperCaseWords(breed)}
     </button>
   );
 
