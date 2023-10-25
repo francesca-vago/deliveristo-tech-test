@@ -9,6 +9,7 @@ import { formatBreed } from "../utils/string";
 import { dogImage, dogImageContainer } from "./DogImage.css";
 import { RefreshButton } from "./RefreshButton";
 import { useEffect } from "react";
+import { Loader } from "./Loader";
 
 interface DogImageProps {
   breed: BreedT;
@@ -33,7 +34,7 @@ export function DogImage({ breed }: DogImageProps) {
       {foldQueryResult(
         randomDogImage,
         () => (
-          <>Loading</>
+          <Loader />
         ),
         (imageSrc) => (
           <div className={dogImageContainer}>

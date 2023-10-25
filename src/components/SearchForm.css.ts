@@ -4,8 +4,6 @@ import { theme } from "../theme.css";
 export const formContainer = style({
   backgroundColor: theme.colors.lightGray,
   padding: `${theme.spacing.xlarge} 0 ${theme.spacing.medium}`,
-  position: "sticky",
-  top: 0,
 });
 
 export const searchForm = style({

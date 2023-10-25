@@ -8,30 +8,31 @@ import {
   header,
   imageContainer,
 } from "./SelectedBreed.css";
-import { ResultStyle } from "./ResultStyle";
+import { VisualizationMode } from "./VisualizationMode";
 
 interface SelectedBreedProps {
   breed: BreedT;
 }
 
 export function SelectedBreed({ breed }: SelectedBreedProps) {
-  const [resultStyle, setResultStyle] = useState<ResultStyle>("image");
+  const [visualizationMode, setVisualizationMode] =
+    useState<VisualizationMode>("image");
 
   return (
     <div
       className={clsx(
         imageContainer,
-        resultStyle === "image" && fullHeightImageContainer
+        visualizationMode === "image" && fullHeightImageContainer
       )}
     >
       <div className={header}>
         <h2>{formatBreed(breed)}</h2>
-        <ResultStyle
-          value={resultStyle}
-          onResultStyleChanged={setResultStyle}
+        <VisualizationMode
+          value={visualizationMode}
+          onChangeVisualizationMode={setVisualizationMode}
         />
       </div>
-      {resultStyle === "gallery" ? (
+      {visualizationMode === "gallery" ? (
         <ImageGallery breed={breed} />
       ) : (
         <DogImage breed={breed} />

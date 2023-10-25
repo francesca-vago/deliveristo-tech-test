@@ -3,8 +3,14 @@ import { useBreeds } from "../queries/breeds";
 import { foldQueryResult } from "../utils/query";
 import { BreedList } from "./BreedList";
 import { SearchForm } from "./SearchForm";
-import { breedSearchContainer } from "./BreedSearch.css";
+import {
+  breedSearchContainer,
+  breedSearchHeader,
+  logo,
+} from "./BreedSearch.css";
 import { BreedT } from "../types/BreedT";
+import { Loader } from "./Loader";
+import Logo from "../assets/logo.png";
 
 interface BreedListProps {
   onSelectBreed: (breed: string, subBreed?: string) => void;
@@ -18,11 +24,14 @@ export function BreedSearch({ onSelectBreed, selectedBreed }: BreedListProps) {
 
   return (
     <div className={breedSearchContainer}>
-      <SearchForm onSearchChange={setSearchQuery} />
+      <div className={breedSearchHeader}>
+        <img src={Logo} alt="logo" className={logo} />
+        <SearchForm onSearchChange={setSearchQuery} />
+      </div>
       {foldQueryResult(
         breeds,
         () => (
-          <>Loading...</>
+          <Loader />
         ),
         (breeds) => (
           <BreedList

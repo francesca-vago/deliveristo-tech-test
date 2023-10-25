@@ -1,6 +1,10 @@
 import { style } from "@vanilla-extract/css";
 import { theme } from "../theme.css";
 
+export const logo = style({
+  height: 70,
+});
+
 export const breedSearchContainer = style({
   height: "100vh",
   overflowY: "auto",
@@ -11,4 +15,11 @@ export const breedSearchContainer = style({
   position: "sticky",
   top: 0,
   scrollbarGutter: "stable",
+});
+
+export const breedSearchHeader = style({
+  position: "sticky",
+  top: 0,
+  paddingTop: theme.spacing.large,
+  background: theme.colors.lightGray,
 });

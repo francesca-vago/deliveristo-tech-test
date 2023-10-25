@@ -1,27 +1,27 @@
 import { ChangeEventHandler, useId } from "react";
-import { form, radio, radioLabel } from "./ResultStyle.css";
+import { form, radio, radioLabel } from "./VisualizationMode.css";
 
-export type ResultStyle = "image" | "gallery";
+export type VisualizationMode = "image" | "gallery";
 
-interface SelectedBreedProps {
-  onResultStyleChanged: (style: "image" | "gallery") => void;
-  value: ResultStyle;
+interface VisualizationModeProps {
+  onChangeVisualizationMode: (style: "image" | "gallery") => void;
+  value: VisualizationMode;
 }
 
-export function ResultStyle({
-  onResultStyleChanged,
+export function VisualizationMode({
+  onChangeVisualizationMode,
   value,
-}: SelectedBreedProps) {
+}: VisualizationModeProps) {
   const imageId = useId();
   const galleryId = useId();
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.checked) {
-      onResultStyleChanged(e.target.value as ResultStyle);
+      onChangeVisualizationMode(e.target.value as VisualizationMode);
     }
   };
 
-  const renderRadio = (radioValue: ResultStyle, id: string) => (
+  const renderRadio = (radioValue: VisualizationMode, id: string) => (
     <input
       id={id}
       type="radio"

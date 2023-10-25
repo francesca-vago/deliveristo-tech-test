@@ -17,7 +17,7 @@ globalStyle("body", {
 });
 
 globalStyle("body, html", {
-  // Prevents the appearance of the scrollbar from causing the content to shift
+  // Prevents the appearance of the scrollbar from shifting the content
   scrollbarGutter: "stable",
 });
 
