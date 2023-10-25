@@ -14,7 +14,9 @@ describe("fetchDecode", () => {
 
     const response = await fetchDecode("https://example.com", TestZ);
 
-    expect(mockFetch).toHaveBeenCalledWith("https://example.com");
+    expect(mockFetch).toHaveBeenCalledWith("https://example.com", {
+      signal: undefined,
+    });
     expect(response).toBe("test");
   });
 
@@ -25,7 +27,9 @@ describe("fetchDecode", () => {
     expect(() =>
       fetchDecode("https://example.com", TestZ)
     ).rejects.toThrowError();
-    expect(mockFetch).toHaveBeenCalledWith("https://example.com");
+    expect(mockFetch).toHaveBeenCalledWith("https://example.com", {
+      signal: undefined,
+    });
   });
 
   test("it makes a GET request and throws an error if reponse type doesn't match defined type", async () => {
@@ -35,6 +39,8 @@ describe("fetchDecode", () => {
     expect(() =>
       fetchDecode("https://example.com", TestZ)
     ).rejects.toThrowError();
-    expect(mockFetch).toHaveBeenCalledWith("https://example.com");
+    expect(mockFetch).toHaveBeenCalledWith("https://example.com", {
+      signal: undefined,
+    });
   });
 });
