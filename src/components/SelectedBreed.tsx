@@ -24,9 +24,14 @@ export function SelectedBreed({
     onGetImageList();
   };
 
+  // Concat breed and sub breeds name, filtering out null sub breeds
+  const breedName = [selectedBreed.breed, selectedBreed.subBreed]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <div className={imageContainer}>
-      <h2>{upperCaseWords(selectedBreed.name)}</h2>
+      <h2>{upperCaseWords(breedName)}</h2>
       <RefreshButton onRefresh={onRefresh} />
       <button onClick={handleClick}>Get List</button>
       {showList ? (

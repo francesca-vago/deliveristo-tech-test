@@ -36,7 +36,7 @@ export function Dashboard() {
     subBreed?: string
   ) => {
     setSelectedBreed({
-      name: breed,
+      breed: breed,
       subBreed: subBreed ?? null,
       images: dogImages,
     });
@@ -64,11 +64,11 @@ export function Dashboard() {
   const handleGetImageList = async () => {
     if (selectedBreed) {
       const dogImages = await getImageList(
-        selectedBreed.name,
+        selectedBreed.breed,
         selectedBreed?.subBreed ?? null
       );
       handleSelectBreed(
-        selectedBreed.name,
+        selectedBreed.breed,
         dogImages,
         selectedBreed?.subBreed ?? undefined
       );

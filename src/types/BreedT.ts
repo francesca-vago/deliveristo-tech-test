@@ -1,5 +1,5 @@
 export type BreedT = {
-  name: string;
+  breed: string;
   subBreed: string | null;
   images: string[];
 };
