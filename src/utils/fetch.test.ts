@@ -1,5 +1,5 @@
 import { expect, test, describe } from "vitest";
-import { fetchDecode } from "./utils";
+import { fetchDecode } from "./fetch";
 import { z } from "zod";
 import {
   createFailedResponse,

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { fetchDecode } from "./utils";
+import { fetchDecode } from "../utils/fetch";
 import { ResponseZ } from "./types";
 
 const BreedZ = z.record(z.array(z.string()));

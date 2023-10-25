@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { ResponseZ } from "./types";
-import { fetchDecode } from "./utils";
+import { fetchDecode } from "../utils/fetch";
 
 const DogZ = z.string();
 const DogResponseZ = ResponseZ(DogZ);
