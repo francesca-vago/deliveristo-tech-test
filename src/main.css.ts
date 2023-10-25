@@ -1,4 +1,4 @@
-import { globalStyle, style } from "@vanilla-extract/css";
+import { globalStyle } from "@vanilla-extract/css";
 import { theme } from "./theme.css";
 
 globalStyle("body", {
@@ -10,4 +10,8 @@ globalStyle("body", {
 
 globalStyle("img", {
   display: "block",
+});
+
+globalStyle("#root", {
+  padding: theme.spacing.xlarge,
 });

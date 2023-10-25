@@ -1,4 +1,4 @@
-import { createGlobalTheme, globalFontFace } from "@vanilla-extract/css";
+import { createGlobalTheme } from "@vanilla-extract/css";
 
 const contentFont = "Poppins";
 

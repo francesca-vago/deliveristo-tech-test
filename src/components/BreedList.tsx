@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { Breeds } from "../api/getBreeds";
 import { SearchForm } from "./SearchForm";
+import {
+  breedButton,
+  breedList,
+  subBreedList,
+  toggleSubBreedsButton,
+} from "./BreedList.css";
 
 interface BreedListProps {
   onSelectBreed: (breed: string, subBreed?: string) => void;
@@ -17,7 +23,7 @@ function BreedItem({ breed, subBreeds, onClick }: BreedItemProps) {
   const [showSubBreeds, setShowSubBreeds] = useState(false);
 
   const renderBreedButton = (breed: string, onClick: () => void) => (
-    <button type="button" onClick={onClick}>
+    <button type="button" onClick={onClick} className={breedButton}>
       {breed}
     </button>
   );
@@ -25,18 +31,21 @@ function BreedItem({ breed, subBreeds, onClick }: BreedItemProps) {
   return (
     <>
       <li>
-        {renderBreedButton(breed, () => onClick(breed))}
         {Boolean(subBreeds.length) && (
           <button
             type="button"
             onClick={() => setShowSubBreeds(!showSubBreeds)}
+            title={showSubBreeds ? "Close" : "Open"}
+            aria-label={showSubBreeds ? "Close" : "Open"}
+            className={toggleSubBreedsButton}
           >
-            {showSubBreeds ? "Close" : "Open"}
+            {showSubBreeds ? "▼" : "►"}
           </button>
         )}
+        {renderBreedButton(breed, () => onClick(breed))}
       </li>
       {showSubBreeds && (
-        <ul>
+        <ul className={subBreedList}>
           {subBreeds.map((sub) => (
             <li key={sub}>
               {renderBreedButton(sub, () => onClick(breed, sub))}
@@ -52,7 +61,7 @@ export function BreedList({ onSelectBreed, breeds }: BreedListProps) {
   return (
     <div>
       <SearchForm />
-      <ul style={{ listStyle: "none", textAlign: "left" }}>
+      <ul className={breedList}>
         {breeds.map(({ breed, subBreeds }) => (
           <BreedItem
             key={breed}
