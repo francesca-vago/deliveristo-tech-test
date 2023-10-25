@@ -1,31 +1,64 @@
 import { useState } from "react";
 import { Breeds } from "../api/getBreeds";
-import { upperCaseWords } from "../utils/string";
+import { clsx, upperCaseWords } from "../utils/string";
 import {
   breedButton,
   breedList,
+  selectedBreedButton,
   subBreedList,
   toggleSubBreedsButton,
 } from "./BreedList.css";
 import { useFilteredBreeds } from "../hooks/useFilteredBreeds";
+import { BreedT } from "../types/BreedT";
 
 interface BreedListProps {
   onSelectBreed: (breed: string, subBreed?: string) => void;
   breeds: Breeds;
   searchQuery?: string;
+  selectedBreed: BreedT | null;
 }
 
 interface BreedItemProps {
   breed: string;
   subBreeds: string[];
   onClick: (breed: string, subBreed?: string) => void;
+  selectedBreed: BreedT | null;
 }
 
-function BreedItem({ breed, subBreeds, onClick }: BreedItemProps) {
+function BreedItem({
+  breed,
+  subBreeds,
+  onClick,
+  selectedBreed,
+}: BreedItemProps) {
   const [showSubBreeds, setShowSubBreeds] = useState(false);
 
-  const renderBreedButton = (breed: string, onClick: () => void) => (
-    <button type="button" onClick={onClick} className={breedButton}>
+  const checkSelectedSubBreed = (breed: BreedT) =>
+    breed.breed === selectedBreed?.breed &&
+    breed.subBreed === selectedBreed.subBreed;
+
+  const checkSelectedBreed = (breed: BreedT) =>
+    breed.breed === selectedBreed?.breed;
+
+  const renderBreedButton = (
+    breed: string,
+    onClick: () => void,
+    parent?: string
+  ) => (
+    <button
+      type="button"
+      onClick={onClick}
+      className={clsx(
+        breedButton,
+        (parent
+          ? checkSelectedSubBreed({
+              breed: parent ?? breed,
+              subBreed: parent ? breed : null,
+            })
+          : checkSelectedBreed({ breed, subBreed: null })) &&
+          selectedBreedButton
+      )}
+    >
       {upperCaseWords(breed)}
     </button>
   );
@@ -50,7 +83,7 @@ function BreedItem({ breed, subBreeds, onClick }: BreedItemProps) {
         <ul className={subBreedList}>
           {subBreeds.map((sub) => (
             <li key={sub}>
-              {renderBreedButton(sub, () => onClick(breed, sub))}
+              {renderBreedButton(sub, () => onClick(breed, sub), breed)}
             </li>
           ))}
         </ul>
@@ -62,6 +95,7 @@ function BreedItem({ breed, subBreeds, onClick }: BreedItemProps) {
 export function BreedList({
   onSelectBreed,
   breeds,
+  selectedBreed,
   searchQuery,
 }: BreedListProps) {
   const filteredBreeds = useFilteredBreeds(breeds, searchQuery);
@@ -74,6 +108,7 @@ export function BreedList({
           breed={breed}
           subBreeds={subBreeds}
           onClick={onSelectBreed}
+          selectedBreed={selectedBreed}
         />
       ))}
     </ul>

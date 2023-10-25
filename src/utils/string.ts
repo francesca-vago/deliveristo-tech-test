@@ -16,3 +16,10 @@ export const formatBreed = (breed: BreedT) => {
 
   return upperCaseWords(breedName);
 };
+
+/**
+ * Utility to join classes conditionally.
+ * A (very) simplified version of the `clsx` package
+ */
+export const clsx = (...classes: unknown[]) =>
+  classes.filter((c) => typeof c === "string").join(" ");

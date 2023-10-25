@@ -7,6 +7,7 @@ describe("BreedList", () => {
   test("renders component", () => {
     render(
       <BreedList
+        selectedBreed={null}
         onSelectBreed={() => void 0}
         breeds={[
           {
@@ -23,6 +24,7 @@ describe("BreedList", () => {
   test("should not show subBreeds by default", () => {
     render(
       <BreedList
+        selectedBreed={null}
         onSelectBreed={() => void 0}
         breeds={[
           {
@@ -44,6 +46,7 @@ describe("BreedList", () => {
 
     render(
       <BreedList
+        selectedBreed={null}
         onSelectBreed={() => void 0}
         breeds={[
           {
@@ -68,6 +71,7 @@ describe("BreedList", () => {
 
     render(
       <BreedList
+        selectedBreed={null}
         onSelectBreed={() => void 0}
         breeds={[
           {
@@ -98,6 +102,7 @@ describe("BreedList", () => {
 
     render(
       <BreedList
+        selectedBreed={null}
         onSelectBreed={onSelectBreed}
         breeds={[
           {

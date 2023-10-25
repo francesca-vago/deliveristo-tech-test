@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BreedT } from "../types/BreedT";
-import { formatBreed } from "../utils/string";
+import { clsx, formatBreed } from "../utils/string";
 import { DogImage } from "./DogImage";
 import { ImageGallery } from "./ImageGallery";
 import {
@@ -19,9 +19,10 @@ export function SelectedBreed({ breed }: SelectedBreedProps) {
 
   return (
     <div
-      className={`${imageContainer} ${
-        resultStyle === "image" ? fullHeightImageContainer : ""
-      }`}
+      className={clsx(
+        imageContainer,
+        resultStyle === "image" && fullHeightImageContainer
+      )}
     >
       <div className={header}>
         <h2>{formatBreed(breed)}</h2>

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { formatBreed, upperCaseWords } from "./string";
+import { clsx, formatBreed, upperCaseWords } from "./string";
 
 describe("utils/string", () => {
   describe("upperCaseWords", () => {
@@ -21,6 +21,7 @@ describe("utils/string", () => {
       expect(result).toBe("Australian Shepherd");
     });
   });
+
   describe("formatBreed", () => {
     test("should format a breed name with first letter upper cased", () => {
       const result = formatBreed({ breed: "bulldog", subBreed: "french" });
@@ -32,6 +33,34 @@ describe("utils/string", () => {
       const result = formatBreed({ breed: "shiba", subBreed: null });
 
       expect(result).toBe("Shiba");
+    });
+  });
+
+  describe("clsx", () => {
+    test("should return a single class if it's the only one provided", () => {
+      const result = clsx("class");
+
+      expect(result).toBe("class");
+    });
+
+    test("should join more classes into a single string", () => {
+      const result = clsx("class1", "class2", "class3");
+
+      expect(result).toBe("class1 class2 class3");
+    });
+
+    test("should filter out non string values", () => {
+      const result = clsx(
+        "class1",
+        null,
+        undefined,
+        "class2",
+        false,
+        "class3",
+        {}
+      );
+
+      expect(result).toBe("class1 class2 class3");
     });
   });
 });

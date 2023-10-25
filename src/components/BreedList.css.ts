@@ -23,6 +23,10 @@ const textButton = style({
   cursor: "pointer",
 });
 
+export const selectedBreedButton = style({
+  textDecoration: "underline",
+});
+
 export const breedButton = style([
   textButton,
   {

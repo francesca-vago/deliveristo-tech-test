@@ -16,7 +16,10 @@ export function Dashboard() {
 
   return (
     <main className={main}>
-      <BreedSearch onSelectBreed={handleSelectBreed} />
+      <BreedSearch
+        onSelectBreed={handleSelectBreed}
+        selectedBreed={selectedBreed}
+      />
       {selectedBreed && <SelectedBreed breed={selectedBreed} />}
     </main>
   );
