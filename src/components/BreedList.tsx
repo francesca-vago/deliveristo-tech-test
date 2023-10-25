@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Breeds } from "../api/getBreeds";
 import { SearchForm } from "./SearchForm";
 import {
@@ -7,6 +7,7 @@ import {
   subBreedList,
   toggleSubBreedsButton,
 } from "./BreedList.css";
+import { useFilteredBreeds } from "../hooks/useFilteredBreeds";
 
 interface BreedListProps {
   onSelectBreed: (breed: string, subBreed?: string) => void;
@@ -60,26 +61,7 @@ function BreedItem({ breed, subBreeds, onClick }: BreedItemProps) {
 export function BreedList({ onSelectBreed, breeds }: BreedListProps) {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredBreeds = useMemo(() => {
-    const filteredBreeds = breeds.filter(
-      (breed) =>
-        breed.breed.includes(searchQuery) ||
-        breed.subBreeds.some((subBreed) => subBreed.includes(searchQuery))
-    );
-
-    const filteredSubBreeds = filteredBreeds.map((breed) =>
-      !breed.subBreeds.length
-        ? breed
-        : {
-            ...breed,
-            subBreeds: breed.subBreeds.filter((subBreed) =>
-              subBreed.includes(searchQuery)
-            ),
-          }
-    );
-
-    return filteredSubBreeds;
-  }, [breeds, searchQuery]);
+  const filteredBreeds = useFilteredBreeds(breeds, searchQuery);
 
   return (
     <div>
