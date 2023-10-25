@@ -13,4 +13,5 @@ export const useRandomDogImage = (breed: BreedT) =>
   useQuery({
     queryKey: randomDogImageQueryKey(breed),
     queryFn: ({ signal }) => getRandomDogImage(breed, signal),
+    refetchOnWindowFocus: false,
   });

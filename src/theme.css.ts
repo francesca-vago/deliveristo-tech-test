@@ -6,10 +6,10 @@ export const theme = createGlobalTheme(":root", {
   colors: {
     lightGray: "#F2F2F2",
     gray: "#E6E6E6",
-    darkGray: "#BEBEBE",
+    darkGray: "#333333",
     text: {
       dark: "#171717",
-      light: "#736F6F",
+      light: "#E0E0E0",
     },
   },
   font: {

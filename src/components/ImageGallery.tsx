@@ -10,6 +10,7 @@ interface ImageGalleryProps {
 
 export function ImageGallery({ breed }: ImageGalleryProps) {
   const imagesList = useDogImagesList(breed);
+
   return foldQueryResult(
     imagesList,
     () => <>Loading</>,

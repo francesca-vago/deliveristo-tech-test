@@ -1,9 +1,14 @@
-import { useRandomDogImage } from "../queries/randomDogImage";
+import { useQueryClient } from "@tanstack/react-query";
+import {
+  randomDogImageQueryKey,
+  useRandomDogImage,
+} from "../queries/randomDogImage";
 import { BreedT } from "../types/BreedT";
 import { foldQueryResult } from "../utils/query";
 import { formatBreed } from "../utils/string";
 import { dogImage } from "./DogImage.css";
 import { RefreshButton } from "./RefreshButton";
+import { useEffect } from "react";
 
 interface DogImageProps {
   breed: BreedT;
@@ -11,6 +16,16 @@ interface DogImageProps {
 
 export function DogImage({ breed }: DogImageProps) {
   const randomDogImage = useRandomDogImage(breed);
+
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    return () => {
+      queryClient.invalidateQueries({
+        queryKey: randomDogImageQueryKey(breed),
+      });
+    };
+  }, [breed, queryClient]);
 
   return (
     <>
@@ -29,7 +44,8 @@ export function DogImage({ breed }: DogImageProps) {
         ),
         () => (
           <>Error</>
-        )
+        ),
+        true
       )}
     </>
   );

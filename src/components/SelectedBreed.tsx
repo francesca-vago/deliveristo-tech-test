@@ -4,23 +4,24 @@ import { formatBreed } from "../utils/string";
 import { DogImage } from "./DogImage";
 import { ImageGallery } from "./ImageGallery";
 import { imageContainer } from "./SelectedBreed.css";
+import { ResultStyle } from "./ResultStyle";
 
 interface SelectedBreedProps {
   breed: BreedT;
 }
 
 export function SelectedBreed({ breed }: SelectedBreedProps) {
-  const [showList, setShowList] = useState(false);
-
-  const handleClick = () => {
-    setShowList(true);
-  };
+  const [resultStyle, setResultStyle] = useState<ResultStyle>("image");
 
   return (
     <div className={imageContainer}>
       <h2>{formatBreed(breed)}</h2>
-      <button onClick={handleClick}>Get List</button>
-      {showList ? <ImageGallery breed={breed} /> : <DogImage breed={breed} />}
+      <ResultStyle value={resultStyle} onResultStyleChanged={setResultStyle} />
+      {resultStyle === "gallery" ? (
+        <ImageGallery breed={breed} />
+      ) : (
+        <DogImage breed={breed} />
+      )}
     </div>
   );
 }
