@@ -4,7 +4,7 @@ import { form, radio, radioLabel } from "./VisualizationMode.css";
 export type VisualizationMode = "image" | "gallery";
 
 interface VisualizationModeProps {
-  onChangeVisualizationMode: (style: "image" | "gallery") => void;
+  onChangeVisualizationMode: (mode: "image" | "gallery") => void;
   value: VisualizationMode;
 }
 

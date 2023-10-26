@@ -6,13 +6,15 @@ const toggleButtonWidth = 15;
 export const breedList = style({
   listStyle: "none",
   margin: 0,
-  padding: 0,
+  padding: theme.spacing.large,
+  paddingTop: 0,
   marginLeft: toggleButtonWidth,
 });
 
 export const subBreedList = style([
   breedList,
   {
+    padding: 0,
     marginLeft: theme.spacing.medium,
   },
 ]);

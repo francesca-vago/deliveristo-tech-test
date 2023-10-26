@@ -5,7 +5,7 @@ const contentFont = "Poppins";
 export const theme = createGlobalTheme(":root", {
   colors: {
     primary: "#FFDCA9",
-    lightGray: "#F2F2F2",
+    lightGray: "#F0F0F0",
     gray: "#E6E6E6",
     darkGray: "#333333",
     text: {

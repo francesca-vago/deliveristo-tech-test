@@ -8,7 +8,7 @@ export const gridContainer = style({
   gap: theme.spacing.small,
   justifyItems: "stretch",
   listStyle: "none",
-  padding: `0 ${theme.spacing.medium}`,
+  padding: 0,
 });
 
 export const dogImage = style({

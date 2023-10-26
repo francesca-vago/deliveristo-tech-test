@@ -1,5 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { theme } from "../style/theme.css";
+import { breakpoints } from "../style/breakpoints.css";
 
 export const dogImageContainer = style({
   width: "100%",
@@ -15,10 +16,15 @@ export const dogImageContainer = style({
 });
 
 export const dogImage = style({
-  maxHeight: `calc(100% - 2 * ${theme.spacing.xlarge})`,
-  minHeight: "50%",
-  maxWidth: "100%",
+  width: "100%",
   objectFit: "contain",
   margin: theme.spacing.xlarge,
+  marginTop: `calc(${theme.spacing.xlarge} * 2)`,
   borderRadius: theme.spacing.medium,
+  "@media": {
+    [breakpoints.desktop]: {
+      maxHeight: `calc(100% - 2 * ${theme.spacing.xlarge})`,
+      minHeight: "50%",
+    },
+  },
 });

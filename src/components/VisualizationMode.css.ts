@@ -5,6 +5,8 @@ import { button } from "../style/common.css";
 export const form = style({
   display: "flex",
   gap: theme.spacing.small,
+  background: "white",
+  borderRadius: theme.spacing.medium,
 });
 
 export const radio = style({

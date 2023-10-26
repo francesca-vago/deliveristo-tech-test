@@ -1,5 +1,5 @@
 import { useId, useState } from "react";
-import searchIcon from "../assets/search.svg";
+import SearchIcon from "../assets/search.svg";
 import {
   formContainer,
   searchButton,
@@ -42,7 +42,7 @@ export function SearchForm({ onSearchChange, onFormSubmit }: SearchFormProps) {
           className={searchInput}
         />
         <button type="submit" aria-label="search" className={searchButton}>
-          <img src={searchIcon} alt="search icon" />
+          <img src={SearchIcon} alt="search icon" />
         </button>
       </form>
     </div>

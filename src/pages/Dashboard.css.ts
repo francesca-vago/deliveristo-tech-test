@@ -1,5 +1,10 @@
 import { style } from "@vanilla-extract/css";
+import { breakpoints } from "../style/breakpoints.css";
 
 export const main = style({
-  display: "flex",
+  "@media": {
+    [breakpoints.desktop]: {
+      display: "flex",
+    },
+  },
 });

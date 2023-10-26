@@ -3,6 +3,12 @@ import { theme } from "./style/theme.css";
 
 globalStyle("*", {
   boxSizing: "border-box",
+  "@media": {
+    "(prefers-reduced-motion)": {
+      transitionDuration: "0s !important",
+      animationDuration: "0s !important",
+    },
+  },
 });
 
 globalStyle("*:before, *:after", {

@@ -1,15 +1,21 @@
 import { style } from "@vanilla-extract/css";
 import { theme } from "../style/theme.css";
+import { breakpoints } from "../style/breakpoints.css";
 
 export const formContainer = style({
-  backgroundColor: theme.colors.lightGray,
-  padding: `${theme.spacing.xlarge} 0 ${theme.spacing.medium}`,
+  background: "white",
+  padding: `${theme.spacing.medium} 0`,
+  "@media": {
+    [breakpoints.desktop]: {
+      backgroundColor: theme.colors.lightGray,
+      padding: `${theme.spacing.xlarge} 0 ${theme.spacing.medium}`,
+    },
+  },
 });
 
 export const searchForm = style({
   backgroundColor: theme.colors.gray,
-  borderRadius: `${theme.spacing.small}`,
-  maxWidth: "20rem",
+  borderRadius: theme.spacing.small,
   margin: "0 auto",
   display: "flex",
   alignItems: "center",

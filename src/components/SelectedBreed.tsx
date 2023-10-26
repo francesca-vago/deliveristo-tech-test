@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { BreedT } from "../types/BreedT";
-import { clsx, formatBreed } from "../utils/string";
+import { clsx } from "../utils/string";
 import { DogImage } from "./DogImage";
 import { ImageGallery } from "./ImageGallery";
-import {
-  fullHeightImageContainer,
-  header,
-  imageContainer,
-} from "./SelectedBreed.css";
+import { PageHeader } from "./PageHeader";
+import { fullHeightImageContainer, imageContainer } from "./SelectedBreed.css";
 import { VisualizationMode } from "./VisualizationMode";
 
 interface SelectedBreedProps {
@@ -25,13 +22,11 @@ export function SelectedBreed({ breed }: SelectedBreedProps) {
         visualizationMode === "image" && fullHeightImageContainer
       )}
     >
-      <div className={header}>
-        <h2>{formatBreed(breed)}</h2>
-        <VisualizationMode
-          value={visualizationMode}
-          onChangeVisualizationMode={setVisualizationMode}
-        />
-      </div>
+      <PageHeader
+        breed={breed}
+        onChangeVisualizationMode={setVisualizationMode}
+        visualizationMode={visualizationMode}
+      />
       {visualizationMode === "gallery" ? (
         <ImageGallery breed={breed} />
       ) : (
