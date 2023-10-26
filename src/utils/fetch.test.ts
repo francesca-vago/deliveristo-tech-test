@@ -5,7 +5,7 @@ import {
   createFailedResponse,
   createSuccessResponse,
   mockFetch,
-} from "../../tests/mocks/mockFetch";
+} from "../../tests/unit/mocks/mockFetch";
 
 describe("fetchDecode", () => {
   test("it makes a GET request and returns the decoded result", async () => {

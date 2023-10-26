@@ -1,5 +1,8 @@
 import { describe, expect, test } from "vitest";
-import { createSuccessResponse, mockFetch } from "../../tests/mocks/mockFetch";
+import {
+  createSuccessResponse,
+  mockFetch,
+} from "../../tests/unit/mocks/mockFetch";
 import {
   getDogListByBreed,
   getDogListBySubBreed,
