@@ -101,7 +101,7 @@ export function BreedList({
   const filteredBreeds = useFilteredBreeds(breeds, searchQuery);
 
   return (
-    <ul className={breedList}>
+    <ul className={breedList} data-testid="gallery">
       {filteredBreeds.map(({ breed, subBreeds }) => (
         <BreedItem
           key={breed}
