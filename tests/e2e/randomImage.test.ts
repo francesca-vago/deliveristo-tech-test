@@ -7,10 +7,16 @@ test("a random image must be shown when a breed is selected", async ({
 
   await page.getByText("Akita").click();
 
+  const imageLocator = page.getByAltText("Akita image");
+
   await expect(
     page.getByRole("heading", { level: 2, name: "Akita" })
   ).toBeVisible();
-  await expect(page.getByAltText("Akita image")).toBeVisible();
+  await expect(imageLocator).toBeVisible();
+
+  const imageSrc = await imageLocator.getAttribute("src");
+
+  expect(imageSrc?.includes("/akita/")).toBe(true);
 });
 
 test("a new random image must be shown if the `get another image` button is clicked", async ({

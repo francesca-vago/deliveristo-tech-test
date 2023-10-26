@@ -8,8 +8,18 @@ test("a gallery with all the images for the selected breed must be shown if the 
   await page.getByText("Akita").click();
   await page.getByText("Gallery").click();
 
+  const galleryLocator = page.getByTestId("gallery");
+
   await expect(
     page.getByRole("heading", { level: 2, name: "Akita" })
   ).toBeVisible();
-  await expect(page.getByTestId("gallery")).toBeVisible();
+  await expect(galleryLocator).toBeVisible();
+
+  const galleryImageLocators = await galleryLocator.getByRole("img").all();
+
+  for (const imageLocator of galleryImageLocators) {
+    const imageSrc = await imageLocator.getAttribute("src");
+
+    expect(imageSrc?.includes("/akita/")).toBe(true);
+  }
 });
