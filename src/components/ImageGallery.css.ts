@@ -6,7 +6,7 @@ export const gridContainer = style({
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
   gap: theme.spacing.small,
-  justifyItems: "center",
+  justifyItems: "stretch",
   listStyle: "none",
   padding: `0 ${theme.spacing.medium}`,
 });

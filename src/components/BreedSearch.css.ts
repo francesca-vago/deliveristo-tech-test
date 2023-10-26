@@ -1,6 +1,10 @@
 import { style } from "@vanilla-extract/css";
 import { theme } from "../style/theme.css";
 
+export const logoHeading = style({
+  margin: theme.spacing.small,
+});
+
 export const logo = style({
   height: 70,
 });

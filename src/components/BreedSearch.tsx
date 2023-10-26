@@ -7,6 +7,7 @@ import {
   breedSearchContainer,
   breedSearchHeader,
   logo,
+  logoHeading,
 } from "./BreedSearch.css";
 import { SearchForm } from "./SearchForm";
 import { ShowQueryResult } from "./ShowQueryResult";
@@ -24,7 +25,13 @@ export function BreedSearch({ onSelectBreed, selectedBreed }: BreedListProps) {
   return (
     <div className={breedSearchContainer}>
       <div className={breedSearchHeader}>
-        <img src={Logo} alt="logo" className={logo} />
+        <h1 className={logoHeading}>
+          <img
+            src={Logo}
+            alt="Woofr, Pawfect images of dogs logo"
+            className={logo}
+          />
+        </h1>
         <SearchForm onSearchChange={setSearchQuery} />
       </div>
       <ShowQueryResult queryResult={breeds}>
