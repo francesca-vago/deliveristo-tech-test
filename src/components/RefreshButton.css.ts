@@ -1,11 +1,11 @@
 import { style } from "@vanilla-extract/css";
-import { theme } from "../theme.css";
+import { theme } from "../style/theme.css";
+import { button } from "../style/common.css";
 
-export const refreshButton = style({
-  border: "none",
-  background: theme.colors.primary,
-  borderRadius: theme.spacing.medium,
-  padding: `${theme.spacing.small} ${theme.spacing.medium}`,
-  cursor: "pointer",
-  alignSelf: "center",
-});
+export const refreshButton = style([
+  button,
+  {
+    background: theme.colors.primary,
+    alignSelf: "center",
+  },
+]);

@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { theme } from "../theme.css";
+import { theme } from "../style/theme.css";
 
 const toggleButtonWidth = 15;
 

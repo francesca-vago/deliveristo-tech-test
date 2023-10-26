@@ -1,16 +1,15 @@
 import { useState } from "react";
+import Logo from "../assets/logo.png";
 import { useBreeds } from "../queries/breeds";
-import { foldQueryResult } from "../utils/query";
+import { BreedT } from "../types/BreedT";
 import { BreedList } from "./BreedList";
-import { SearchForm } from "./SearchForm";
 import {
   breedSearchContainer,
   breedSearchHeader,
   logo,
 } from "./BreedSearch.css";
-import { BreedT } from "../types/BreedT";
-import { Loader } from "./Loader";
-import Logo from "../assets/logo.png";
+import { SearchForm } from "./SearchForm";
+import { ShowQueryResult } from "./ShowQueryResult";
 
 interface BreedListProps {
   onSelectBreed: (breed: string, subBreed?: string) => void;
@@ -28,23 +27,16 @@ export function BreedSearch({ onSelectBreed, selectedBreed }: BreedListProps) {
         <img src={Logo} alt="logo" className={logo} />
         <SearchForm onSearchChange={setSearchQuery} />
       </div>
-      {foldQueryResult(
-        breeds,
-        () => (
-          <Loader />
-        ),
-        (breeds) => (
+      <ShowQueryResult queryResult={breeds}>
+        {(breeds) => (
           <BreedList
             breeds={breeds}
             onSelectBreed={onSelectBreed}
             searchQuery={searchQuery}
             selectedBreed={selectedBreed}
           />
-        ),
-        () => (
-          <>Error</>
-        )
-      )}
+        )}
+      </ShowQueryResult>
     </div>
   );
 }

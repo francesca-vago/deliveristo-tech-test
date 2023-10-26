@@ -3,6 +3,7 @@ import { BreedSearch } from "../components/BreedSearch";
 import { SelectedBreed } from "../components/SelectedBreed";
 import { BreedT } from "../types/BreedT";
 import { main } from "./Dashboard.css";
+import { SplashScreen } from "../components/SplashScreen";
 
 export function Dashboard() {
   const [selectedBreed, setSelectedBreed] = useState<BreedT | null>(null);
@@ -20,7 +21,11 @@ export function Dashboard() {
         onSelectBreed={handleSelectBreed}
         selectedBreed={selectedBreed}
       />
-      {selectedBreed && <SelectedBreed breed={selectedBreed} />}
+      {selectedBreed ? (
+        <SelectedBreed breed={selectedBreed} />
+      ) : (
+        <SplashScreen />
+      )}
     </main>
   );
 }
