@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { getRandomDogByBreed, getRandomDogBySubBreed } from "../api/getDogs";
-import { BreedT } from "../types/BreedT";
+import { getRandomDogByBreed, getRandomDogBySubBreed } from "../../api/getDogs";
+import { BreedT } from "../../types/BreedT";
 
 export const randomDogImageQueryKey = (breed: BreedT) => ["randomImage", breed];
 

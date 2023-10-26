@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { getDogListByBreed, getDogListBySubBreed } from "../api/getDogs";
-import { BreedT } from "../types/BreedT";
+import { getDogListByBreed, getDogListBySubBreed } from "../../api/getDogs";
+import { BreedT } from "../../types/BreedT";
 
 export const dogImagesListQueryKey = (breed: BreedT) => ["imagesList", breed];
 

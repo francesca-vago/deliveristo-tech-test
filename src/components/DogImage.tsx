@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import {
   randomDogImageQueryKey,
   useRandomDogImage,
-} from "../queries/randomDogImage";
+} from "../hooks/queries/randomDogImage";
 import { BreedT } from "../types/BreedT";
 import { formatBreed } from "../utils/string";
 import { dogImage, dogImageContainer } from "./DogImage.css";

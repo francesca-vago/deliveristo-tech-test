@@ -1,4 +1,4 @@
-import { useDogImagesList } from "../queries/dogImagesList";
+import { useDogImagesList } from "../hooks/queries/dogImagesList";
 import { BreedT } from "../types/BreedT";
 import { formatBreed } from "../utils/string";
 import { dogImage, gridContainer } from "./ImageGallery.css";

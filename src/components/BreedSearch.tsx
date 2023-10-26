@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Logo from "../assets/logo.png";
-import { useBreeds } from "../queries/breeds";
+import { useBreeds } from "../hooks/queries/breeds";
 import { BreedT } from "../types/BreedT";
 import { BreedList } from "./BreedList";
 import {
